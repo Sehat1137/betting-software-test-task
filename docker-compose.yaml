@@ -1,0 +1,21 @@
+version: "3.4"
+
+services:
+  redis:
+    image: redis:6
+    container_name: redis_local
+    ports:
+      - "6379:6379"
+
+  app:
+    build: .
+    container_name: betting-software-test-task
+    entrypoint: bash -c "uvicorn --factory main:get_app --host 0.0.0.0 --port 8080 --reload"
+    env_file:
+      - .env
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+    ports:
+      - "8080:8080"
