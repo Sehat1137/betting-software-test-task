@@ -1,6 +1,6 @@
 # betting-software-test-task
 
-###.env file
+### env file
 ```shell
 REDIS_HOST=redis
 REDIS_PORT=6379

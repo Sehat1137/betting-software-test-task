@@ -51,7 +51,7 @@ async def update_body_by_key(
 
 
 @inject
-async def get_stats(storage: StorageService = Depends(Provide[Container.storage_service])):
+async def get_stats(storage: StorageService = Depends(Provide[Container.storage_service])) -> JSONResponse:
     return JSONResponse(GetStatsResponse(duplicates=await storage.get_statistic()).dict())
 
 

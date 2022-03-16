@@ -33,7 +33,7 @@ class StorageService:
     async def remove(self, key: str) -> None:
         await self._connection.delete(key)
 
-    async def update(self, key: str, body: dict):
+    async def update(self, key: str, body: dict) -> str:
         await self.remove(key)
         return await self.add(body)
 
@@ -51,6 +51,6 @@ class StorageService:
             return None
         return BodyEntry.parse_raw(result)
 
-    def _get_key_by_body(self, body: dict):
+    def _get_key_by_body(self, body: dict) -> str:
         raw_key: bytes = "".join(map("{0[0]}{0[1]}".format, body.items())).encode()
         return base64.b64encode(raw_key).decode()
